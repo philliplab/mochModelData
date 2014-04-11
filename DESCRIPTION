@@ -1,0 +1,17 @@
+Package: mochModelData
+Title: Data for the mother child model
+Description: This package carefully documents the process by which the source
+    data for the project was turned into the input parameters for the modgen
+    model. The goals of the package are 1) Provide a complete audit trail for
+    all data manipulations. 2) Provide comprehensive documentation that will
+    make it easy for anyone to replicate all the steps. 3) Make some of the
+    tools and tricks used to get the data to work with the model available to
+    other users of the model.
+Version: 0.1
+Type: Package
+Author: Phillip Labuschagne <philliplab@gmail.com>
+Maintainer: Phillip Labuschagne <philliplab@gmail.com>
+Depends:
+    testthat,
+    reshape2
+License: MIT
