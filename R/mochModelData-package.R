@@ -10,10 +10,11 @@
 #' 
 #' The package is organized as follows. The source
 #' data (as obtained from emails etc) is available in the extdata/src_dat
-#' folder in the project. If modification had to be made to those files that
+#' folder in the project. A readme file in that directory provides more details
+#' about the source data. If modifications had to be made to those files that
 #' were much easier in EXCEL or another tool, the source data was modified and
-#' the modified copy was stored in extdata/modified_dat. The package vignette
-#' describes how the modified data was constructed. 
+#' the modified copy was stored in extdata/modified_dat. A readme file in that
+#' folder describes how the modified data was constructed. 
 #' 
 #' The actual data that is
 #' used to produce the input parameters can be found in the data folder in csv
