@@ -17,8 +17,8 @@
 #' folder describes how the modified data was constructed. 
 #' 
 #' The actual data that is
-#' used to produce the input parameters can be found in the data folder in csv
-#' format. This data can also be loaded in R via data(). Each dataset in the
+#' used to produce the input parameters can be found in the data folder in .RData
+#' format. This data can be loaded in R via data(). Each dataset in the
 #' data folder will have comprehensive documentation on how to obtain it from
 #' the src_dat or the modified_dat.
 #'

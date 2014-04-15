@@ -16,17 +16,20 @@ work with the model available to other users of the model.
 \details{
 The package is organized as follows. The source data (as
 obtained from emails etc) is available in the
-extdata/src_dat folder in the project. If modification had
-to be made to those files that were much easier in EXCEL or
-another tool, the source data was modified and the modified
-copy was stored in extdata/modified_dat. The package
-vignette describes how the modified data was constructed.
+extdata/src_dat folder in the project. A readme file in
+that directory provides more details about the source data.
+If modifications had to be made to those files that were
+much easier in EXCEL or another tool, the source data was
+modified and the modified copy was stored in
+extdata/modified_dat. A readme file in that folder
+describes how the modified data was constructed.
 
 The actual data that is used to produce the input
-parameters can be found in the data folder in csv format.
-This data can also be loaded in R via data(). Each dataset
-in the data folder will have comprehensive documentation on
-how to obtain it from the src_dat or the modified_dat.
+parameters can be found in the data folder in .RData
+format. This data can be loaded in R via data(). Each
+dataset in the data folder will have comprehensive
+documentation on how to obtain it from the src_dat or the
+modified_dat.
 
 The data included in the package is further manipulated
 into the formats required by the model using the various
