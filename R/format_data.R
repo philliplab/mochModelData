@@ -86,3 +86,30 @@ format_AbuseRates <- function(AbuseRates){
   modgen_repr <- coerce_ABUSE_DEP_to_nice_string(AbuseRates)
   return(modgen_repr)
 }
+
+#' Formats the DepressionNoAbuseRates into formats the ModGen can use.
+#' 
+#' Also maps the X0-X5 disease states onto the disease status used by the ModGen model
+#' 
+#' Just calls the format_AbuseRates function.
+#' @param AbuseRates The dataset to be mapped and formatted. Must have columns gender, ses, mds, Age and value.
+#' @export
+
+format_DepressionNoAbuseRates <- function(DepressionNoAbuseRates){
+  names(DepressionNoAbuseRates)[1] <- "Age"
+  format_AbuseRates(DepressionNoAbuseRates)
+}
+
+#' Formats the DepressionAbuseRates into formats the ModGen can use.
+#' 
+#' Also maps the X0-X5 disease states onto the disease status used by the ModGen model
+#' 
+#' Just calls the format_AbuseRates function.
+#' @param AbuseRates The dataset to be mapped and formatted. Must have columns gender, ses, mds, Age and value.
+#' @export
+
+format_DepressionAbuseRates <- function(DepressionAbuseRates){
+  names(DepressionAbuseRates)[1] <- "Age"
+  format_AbuseRates(DepressionAbuseRates)
+}
+
