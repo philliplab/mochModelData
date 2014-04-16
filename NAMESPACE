@@ -1,3 +1,4 @@
+export(format_AbuseRates)
 export(format_DropOutRates)
 import(digest)
 import(reshape2)
