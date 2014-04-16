@@ -17,7 +17,7 @@
 #' folder describes how the modified data was constructed. 
 #' 
 #' The actual data that is
-#' used to produce the input parameters can be found in the data folder in .RData
+#' used to produce the input parameters can be found in the data folder in .rda
 #' format. This data can be loaded in R via data(). Each dataset in the
 #' data folder will have comprehensive documentation on how to obtain it from
 #' the src_dat or the modified_dat.
@@ -35,7 +35,7 @@
 #' arguments that allow one to provide different datasets to these function,
 #' but if no arguments are supplied, the internal datasets will be used.
 #' 
-#' @import testthat reshape2
+#' @import testthat reshape2 digest
 #' @docType package
 #' @name mochModelData
 NULL

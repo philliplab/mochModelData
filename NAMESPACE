@@ -1,2 +1,4 @@
+export(format_DropOutRates)
+import(digest)
 import(reshape2)
 import(testthat)
