@@ -5,8 +5,8 @@
 format_AbuseRates(AbuseRates)
 }
 \arguments{
-  \item{AbuseRates}{The dataset to be mapped and formatted.
-  Must have columns gender, ses, mds, Age and value.}
+  \item{AbuseRates}{The dataset to be mapped and
+  formatted.}
 }
 \description{
 Also maps the X0-X5 disease states onto the disease status

@@ -56,7 +56,7 @@ coerce_ABUSE_DEP_to_nice_string <- function(x){
 #' Formats the AbuseRates into formats the ModGen can use.
 #' 
 #' Also maps the X0-X5 disease states onto the disease status used by the ModGen model
-#' @param AbuseRates The dataset to be mapped and formatted. Must have columns gender, ses, mds, Age and value.
+#' @param AbuseRates The dataset to be mapped and formatted.
 #' @export
 
 format_AbuseRates <- function(AbuseRates){
@@ -87,29 +87,80 @@ format_AbuseRates <- function(AbuseRates){
   return(modgen_repr)
 }
 
-#' Formats the DepressionNoAbuseRates into formats the ModGen can use.
+#' Formats the NotAbusedDepressionRates into formats the ModGen can use.
 #' 
 #' Also maps the X0-X5 disease states onto the disease status used by the ModGen model
 #' 
 #' Just calls the format_AbuseRates function.
-#' @param AbuseRates The dataset to be mapped and formatted. Must have columns gender, ses, mds, Age and value.
+#' @param AbuseRates The dataset to be mapped and formatted.
 #' @export
 
-format_DepressionNoAbuseRates <- function(DepressionNoAbuseRates){
-  names(DepressionNoAbuseRates)[1] <- "Age"
-  format_AbuseRates(DepressionNoAbuseRates)
+format_NotAbusedDepressionRates <- function(NotAbusedDepressionRates){
+  names(NotAbusedDepressionRates)[1] <- "Age"
+  format_AbuseRates(NotAbusedDepressionRates)
 }
 
-#' Formats the DepressionAbuseRates into formats the ModGen can use.
+#' Formats the AbusedDepressionRates into formats the ModGen can use.
 #' 
 #' Also maps the X0-X5 disease states onto the disease status used by the ModGen model
 #' 
 #' Just calls the format_AbuseRates function.
-#' @param AbuseRates The dataset to be mapped and formatted. Must have columns gender, ses, mds, Age and value.
+#' @param AbuseRates The dataset to be mapped and formatted.
 #' @export
 
-format_DepressionAbuseRates <- function(DepressionAbuseRates){
-  names(DepressionAbuseRates)[1] <- "Age"
-  format_AbuseRates(DepressionAbuseRates)
+format_AbusedDepressionRates <- function(AbusedDepressionRates){
+  names(AbusedDepressionRates)[1] <- "Age"
+  format_AbuseRates(AbusedDepressionRates)
+}
+
+#' Converts the processed Condom Usage rates into nice strings.
+#' @param x Processed Condom Usage Rates.
+#' 
+coerce_condom_usage_to_nice_string <- function(x){
+  string <- ""
+  prev_ses <- 'hello'
+  for (i in 1:nrow(x)){
+    if (prev_ses != x$ses[i]){
+      prev_ses <- x$ses[i]
+      string <- paste(string, "\n", "//", x$gender[i], ", ", x$ses[i], "\n", sep = "")
+    }
+    string <- paste(string, x$value[i], ", ", sep = "")
+  }
+  string <- gsub(',[^,]*$', '', string)
+  return(string)
+}
+
+#' Formats the CondomUsageRates into formats the ModGen can use. (Abused and Not Abused)
+#' 
+#' Also maps the X0-X5 disease states onto the disease status used by the ModGen model
+#' @param CondomUsageRates The dataset to be mapped and formatted.
+#' @export
+
+format_CondomUsageRates <- function(CondomUsageRates){
+  CondomUsageRates <- melt(CondomUsageRates)
+  CondomUsageRates$variable <- as.character(CondomUsageRates$variable)
+  parsed_headers <- do.call(rbind, lapply(strsplit(CondomUsageRates$variable, '\\.'),
+                                          coerce_EXCEL_col_header_to_df))
+  CondomUsageRates <- cbind(parsed_headers, CondomUsageRates)
+  CondomUsageRates$variable <- NULL
+  
+  remaps <- list(X0 = "HEALTHY",
+                 X1 = "INFECTED",
+                 X2 = "SYMPTOMS",
+                 X3 = "TREATMENT",
+                 X4 = "DIAGNOSED",
+                 X5 = "DEATH")
+  for (i in 1:nrow(CondomUsageRates)){
+    CondomUsageRates$mds[i] <- remaps[[CondomUsageRates$mds[i]]]
+  }
+  CondomUsageRates$value[CondomUsageRates$mds == "DIAGNOSED"] <- CondomUsageRates$value[CondomUsageRates$mds == "INFECTED"]
+  CondomUsageRates$mds <- factor(CondomUsageRates$mds, 
+                           levels = c("HEALTHY", "INFECTED", "SYMPTOMS", 
+                                      "DIAGNOSED", "TREATMENT", "DEATH"),
+                           ordered = TRUE)
+  
+  CondomUsageRates <- CondomUsageRates[with(CondomUsageRates, order(gender, ses, mds)),]
+  modgen_repr <- coerce_condom_usage_to_nice_string(CondomUsageRates)
+  return(modgen_repr)
 }
 
