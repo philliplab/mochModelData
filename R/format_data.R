@@ -39,13 +39,32 @@ coerce_EXCEL_col_header_to_df <- function(x)
 #' 
 coerce_ABUSE_DEP_to_nice_string <- function(x){
   string <- ""
-  n_ages <- length(unique(x$Age))
+  n_age <- length(unique(x$Age))
   for (i in 1:nrow(x)){
-    if ((i-1) %% n_ages == 0){
-      string <- paste(string, "//", x$gender[i], ", ", x$ses[i], ", ", x$mds[i], "\n", sep = "")
+    if ((i-1) %% n_age == 0){
+      string <- paste(string, "//", x$gender[i], ", ", x$ses[i], ",", x$mds[i], "\n", sep = "")
     }
     string <- paste(string, x$value[i], ", ", sep = "")
-    if (i %% n_ages == 0){
+    if (i %% n_age == 0){
+      string <- paste(string, "\n", sep = "")
+    }
+  }
+  string <- gsub(',[^,]*$', '', string)
+  return(string)
+}
+
+#' Converts the processed Debut rates into nice strings.
+#' @param x Processed Debut Rates.
+#' 
+coerce_DEBUT_to_nice_string <- function(x){
+  string <- ""
+  n_mds <- length(unique(x$mds))
+  for (i in 1:nrow(x)){
+    if ((i-1) %% n_mds == 0){
+      string <- paste(string, "//", x$Age[i], ", ", x$gender[i], ", ", x$ses[i], "\n", sep = "")
+    }
+    string <- paste(string, x$value[i], ", ", sep = "")
+    if (i %% n_mds == 0){
       string <- paste(string, "\n", sep = "")
     }
   }
@@ -59,7 +78,7 @@ coerce_ABUSE_DEP_to_nice_string <- function(x){
 #' @param AbuseRates The dataset to be mapped and formatted.
 #' @export
 
-format_AbuseRates <- function(AbuseRates){
+format_AbuseRates <- function(AbuseRates, ordering = 'Abuse'){
   AbuseRates <- melt(AbuseRates, id.vars = 'Age')
   AbuseRates$variable <- as.character(AbuseRates$variable)
   parsed_headers <- do.call(rbind, lapply(strsplit(AbuseRates$variable, '\\.'),
@@ -69,21 +88,23 @@ format_AbuseRates <- function(AbuseRates){
   
   remaps <- list(X0 = "HEALTHY",
                  X1 = "INFECTED",
-                 X2 = "SYMPTOMS",
-                 X3 = "TREATMENT",
-                 X4 = "DIAGNOSED",
+                 X4 = "SYMPTOMS",
                  X5 = "DEATH")
+  AbuseRates <- subset(AbuseRates, mds %in% names(remaps))
   for (i in 1:nrow(AbuseRates)){
     AbuseRates$mds[i] <- remaps[[AbuseRates$mds[i]]]
   }
-  AbuseRates$value[AbuseRates$mds == "DIAGNOSED"] <- AbuseRates$value[AbuseRates$mds == "INFECTED"]
   AbuseRates$mds <- factor(AbuseRates$mds, 
-                           levels = c("HEALTHY", "INFECTED", "SYMPTOMS", 
-                                      "DIAGNOSED", "TREATMENT", "DEATH"),
+                           levels = c("HEALTHY", "INFECTED", "SYMPTOMS", "DEATH"),
                            ordered = TRUE)
   
-  AbuseRates <- AbuseRates[with(AbuseRates, order(gender, ses, mds, Age)),]
-  modgen_repr <- coerce_ABUSE_DEP_to_nice_string(AbuseRates)
+  if (ordering == 'Abuse'){
+    AbuseRates <- AbuseRates[with(AbuseRates, order(gender, ses, mds, Age)),]
+    modgen_repr <- coerce_ABUSE_DEP_to_nice_string(AbuseRates)
+  } else if (ordering == "Debut"){
+    AbuseRates <- AbuseRates[with(AbuseRates, order(Age, gender, ses, mds)),]
+    modgen_repr <- coerce_DEBUT_to_nice_string(AbuseRates)
+  }
   return(modgen_repr)
 }
 
@@ -120,5 +141,5 @@ format_AbusedDepressionRates <- function(AbusedDepressionRates){
 #' @export
 
 format_DebutRates <- function(DebutRates){
-  format_AbuseRates(DebutRates)
+  format_AbuseRates(DebutRates, ordering = "Debut")
 }
