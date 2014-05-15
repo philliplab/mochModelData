@@ -20,12 +20,12 @@ test_that("The correct NotAbusedDepressionRates data is included", {
   expect_that(digest(NotAbusedDepressionRates), equals("ec4fa254d7640772e3912db30c830e98"))
 })
 
-test_that("The correct NotAbusedCondomUsageRates data is included", {
-  data(NotAbusedCondomUsageRates)
-  expect_that(digest(NotAbusedCondomUsageRates), equals("27e9f8e694b771e5b4ce060d1a45a5e3"))
+test_that("The correct AbusedDebutRates data is included", {
+  data(AbusedDebutRates)
+  expect_that(digest(AbusedDebutRates), equals("b5c7c51cf2c2b7b1779bfb0b7a9a9b8e"))
 })
 
-test_that("The correct AbusedCondomUsageRates data is included", {
-  data(AbusedCondomUsageRates)
-  expect_that(digest(AbusedCondomUsageRates), equals("e3166122778596bfc56809dd62d7c232"))
+test_that("The correct NotAbusedDebutRates data is included", {
+  data(NotAbusedDebutRates)
+  expect_that(digest(NotAbusedDebutRates), equals("30e0f12cd3d3421e4019b4d705618cc3"))
 })

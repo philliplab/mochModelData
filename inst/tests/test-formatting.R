@@ -20,12 +20,12 @@ test_that("NotAbusedDepressionRates is formatted correctly", {
   expect_that(digest(format_NotAbusedDepressionRates(NotAbusedDepressionRates)), equals("c2498afda1617fab7778a1ad23f21657"))
 })
 
-test_that("AbusedCondomUsageRates is formatted correctly", {
-  data(AbusedCondomUsageRates)
-  expect_that(digest(format_CondomUsageRates(AbusedCondomUsageRates)), equals("5f5bca14e8784ea0d740f17676fbff48"))
+test_that("AbusedDebutRates is formatted correctly", {
+  data(AbusedDebutRates)
+  expect_that(digest(format_DebutRates(AbusedDebutRates)), equals("62816b78aa1ddfd9c5a54449fa526720"))
 })
 
-test_that("NotAbusedCondomUsageRates is formatted correctly", {
-  data(NotAbusedCondomUsageRates)
-  expect_that(digest(format_CondomUsageRates(NotAbusedCondomUsageRates)), equals("faec058d15c3ab0922d55900a00f9571"))
+test_that("NotAbusedDebutRates is formatted correctly", {
+  data(NotAbusedDebutRates)
+  expect_that(digest(format_DebutRates(NotAbusedDebutRates)), equals("b2dbab5edbfdcada9437859558e45a6e"))
 })

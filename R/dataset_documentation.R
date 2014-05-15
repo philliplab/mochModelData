@@ -79,10 +79,10 @@ NULL
 #' rates. The rates are split up by gender (f/m), socio economic status (l/h) and the mother's disease status (X0 to X5)
 NULL
 
-#' The condom usage probabilities in absence of abuse
+#' The incidence of sexual debut at early ages in the absence of abuse
 #' 
-#' The data was obtained from the 'Condom use' worksheet in the 'child outcomes data.xlsx' file. The data is contained
-#' in cells B7:Y8. Note that the disease states 
+#' The data was obtained from the 'Sexual debute' worksheet in the 'child outcomes data.xlsx' file. The data is contained
+#' in cells A5:Y8. Note that the disease states 
 #' represented by X0 to X5 in this sheet does not exactly match the disease states in the model:
 #' \itemize{
 #'   \item X0: the 'HEALTHY' state
@@ -95,16 +95,16 @@ NULL
 #' 
 #' @docType data
 #' @keywords datasets
-#' @name NotAbusedCondomUsageRates
-#' @usage data(NotAbusedCondomUsageRates)
-#' @format A single row with many columns. The column names indicate the different risk factors. 
+#' @name NotAbusedDebutRates
+#' @usage data(NotAbusedDebutRates)
+#' @format A row for each age. The column names indicate the different risk factors. 
 #' The probabilities are split up by gender (f/m), socio economic status (l/h) and the mother's disease status (X0 to X5)
 NULL
 
-#' The condom usage probabilities in presence of abuse
+#' The incidence of sexual debut at early ages in the presence of abuse
 #' 
-#' The data was obtained from the 'Condom use' worksheet in the 'child outcomes data.xlsx' file. The data is contained
-#' in cells B11:Y12. Note that the disease states 
+#' The data was obtained from the 'Sexual debute' worksheet in the 'child outcomes data.xlsx' file. The data is contained
+#' in cells A12:Y15. Note that the disease states 
 #' represented by X0 to X5 in this sheet does not exactly match the disease states in the model:
 #' \itemize{
 #'   \item X0: the 'HEALTHY' state
@@ -117,8 +117,8 @@ NULL
 #' 
 #' @docType data
 #' @keywords datasets
-#' @name AbusedCondomUsageRates
-#' @usage data(AbusedCondomUsageRates)
-#' @format A single row with many columns. The column names indicate the different risk factors. 
+#' @name NotAbusedDebutRates
+#' @usage data(NotAbusedDebutRates)
+#' @format A row for each age. The column names indicate the different risk factors. 
 #' The probabilities are split up by gender (f/m), socio economic status (l/h) and the mother's disease status (X0 to X5)
 NULL

@@ -1,6 +1,6 @@
 export(format_AbuseRates)
 export(format_AbusedDepressionRates)
-export(format_CondomUsageRates)
+export(format_DebutRates)
 export(format_DropOutRates)
 export(format_NotAbusedDepressionRates)
 import(digest)
